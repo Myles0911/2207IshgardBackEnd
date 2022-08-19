@@ -1,13 +1,13 @@
 package app;
 
-import daos.PostgresIshgardiansDAO;
+import daos.complaints.PostgresComplaintsDAO;
 import handlers.ReportIshgardComplaintsHandler;
 import io.javalin.Javalin;
-import service.IshgardiansService;
-import service.IshgardiansServiceImpl;
+import service.ComplaintsServices;
+import service.ComplaintsServicesImpl;
 
 public class App {
-    public static IshgardiansService ishgardiansService = new IshgardiansServiceImpl( new PostgresIshgardiansDAO());
+    public static ComplaintsServices complaintsServices = new ComplaintsServicesImpl( new PostgresComplaintsDAO());
 
     public static void main(String [] args) {
         Javalin app = Javalin.create(config->{
@@ -17,6 +17,9 @@ public class App {
 
         //Routes for Ishgardians
         ReportIshgardComplaintsHandler reportIshgardComplaintsHandler = new ReportIshgardComplaintsHandler();
-        app.post("/ishgardians")
+        app.post("/complaints ", reportIshgardComplaintsHandler);
+        app.start();
     }
+
+
 }

@@ -2,12 +2,26 @@ package handlers;
 
 import app.App;
 import com.google.gson.Gson;
-import entities.Ishgardians;
+import entities.Complaints;
+import org.jetbrains.annotations.NotNull;
+import io.javalin.http.Context;
+import io.javalin.http.Handler;
 
-public class ReportIshgardComplaintsHandler {
-    String json = ctx.body();
-    Gson gson = new Gson();
-    Ishgardians ishgardians = gson.fromJson(json, Ishgardians.class);
-    Ishgardians newIshgardians = App
+public class ReportIshgardComplaintsHandler implements Handler {
+
+
+    @Override
+    public void handle(@NotNull Context ctx) throws Exception {
+
+        String json = ctx.body();
+        Gson gson = new Gson();
+        Complaints complaints = gson.fromJson(json, Complaints.class);
+        Complaints newComplaints = App.complaintsServices.reportComplaint(complaints);
+        String comSon = gson.toJson(newComplaints);
+        ctx.status(201);
+        ctx.result(comSon);
+
+    }
+
 
 }
