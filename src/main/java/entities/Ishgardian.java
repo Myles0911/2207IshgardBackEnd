@@ -2,17 +2,17 @@ package entities;
 
 import java.util.Objects;
 
-public class Ishgardians {
+public class Ishgardian {
     int userid;
     String name;
     String password;
     String role;
 
-    public Ishgardians() {
+    public Ishgardian() {
 
     }
 
-    public Ishgardians(int userid, String name, String password, String role) {
+    public Ishgardian(int userid, String name, String password, String role) {
         this.userid = userid;
         this.name = name;
         this.password = password;
@@ -55,7 +55,7 @@ public class Ishgardians {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ishgardians that = (Ishgardians) o;
+        Ishgardian that = (Ishgardian) o;
         return userid == that.userid && name.equals(that.name) && password.equals(that.password) && role.equals(that.role);
     }
 
@@ -66,7 +66,7 @@ public class Ishgardians {
 
     @Override
     public String toString() {
-        return "Ishgardians{" +
+        return "Ishgardian{" +
                 "userid=" + userid +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +

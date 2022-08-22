@@ -3,6 +3,7 @@ package daos.complaints;
 import entities.Complaints;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface ComplaintsDAO {
@@ -14,5 +15,5 @@ public interface ComplaintsDAO {
         List<Complaints> getAllComplaints();
 
         //Get Individual Complaint
-    Complaints getComplaintById(int complain_id);
+    Complaints getComplaintById(int id);
 }

@@ -10,6 +10,7 @@ import utils.connectionUtil;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ComplaintsDAOtest {
@@ -38,8 +39,28 @@ public class ComplaintsDAOtest {
     void create_Complaints_test() {
         Complaints complaints = new Complaints(1, "The Brume needs to be better maintained", "UNREVIEWED", -1);
         Complaints savedComplaints = complaintsDAO.createComplaints(complaints);
-        Assertions.assertNotEquals(0, savedComplaints.getComplain_id());
+        Assertions.assertNotEquals(0, savedComplaints.getid());
         System.out.println(complaints);
+    }
+
+    @Test
+    @Order(2)
+    void get_complaint_by_id_test() {
+        Complaints complaints = complaintsDAO.getComplaintById(1);
+        Assertions.assertEquals("The Brume needs to be better maintained",complaints.getDescription());
+    }
+
+    @Test
+    @Order(3)
+    void get_all_complaints_test() {
+        Complaints com1 = new Complaints(1, "The Brume needs to be better maintained", "UNREVIEWED", -1);
+        Complaints com2 = new Complaints(2, "Church is gaining too much influence",  "REJECTED", -1);
+
+        complaintsDAO.createComplaints(com1);
+        complaintsDAO.createComplaints(com2);
+
+        List<Complaints> complaintsList = complaintsDAO.getAllComplaints();
+        Assertions.assertEquals(2, complaintsList.size());
     }
 }
 

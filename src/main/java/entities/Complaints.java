@@ -3,7 +3,7 @@ package entities;
 import java.util.Objects;
 
 public class Complaints {
-    int complain_id;
+    int id;
     String description;
     String status;
     int meeting_id;
@@ -12,19 +12,19 @@ public Complaints() {
 
 }
 
-    public Complaints(int complain_id, String description, String status, int meeting_id) {
-        this.complain_id = complain_id;
+    public Complaints(int id, String description, String status, int meeting_id) {
+        this.id = id;
         this.description = description;
         this.status = status;
         this.meeting_id = meeting_id;
     }
 
-    public int getComplain_id() {
-        return complain_id;
+    public int getid() {
+        return id;
     }
 
-    public void setComplain_id(int complain_id) {
-        this.complain_id = complain_id;
+    public void setid(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -56,18 +56,18 @@ public Complaints() {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Complaints that = (Complaints) o;
-        return complain_id == that.complain_id && meeting_id == that.meeting_id && description.equals(that.description) && status.equals(that.status);
+        return id == that.id && meeting_id == that.meeting_id && description.equals(that.description) && status.equals(that.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(complain_id, description, status, meeting_id);
+        return Objects.hash(id, description, status, meeting_id);
     }
 
     @Override
     public String toString() {
         return "Complaints{" +
-                "complain_id=" + complain_id +
+                "id=" + id +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
                 ", meeting_id=" + meeting_id +

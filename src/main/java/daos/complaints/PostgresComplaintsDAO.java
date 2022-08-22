@@ -12,18 +12,20 @@ public class PostgresComplaintsDAO implements ComplaintsDAO {
     @Override
     public Complaints createComplaints(Complaints complaints) {
         try(Connection conn = connectionUtil.ConnectionUtil.createConnection()) {
-            String sql = "insert into Complaints (description, status, meeting_id) values(?,?,?) ";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, complaints.getDescription());
-            ps.setString(2, complaints.getStatus());
-            ps.setInt(3,complaints.getMeeting_id());
+            String sql = "insert into complaints values (default, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, complaints.getDescription());
+            preparedStatement.setString(2, complaints.getStatus());
+            preparedStatement.setInt(3,complaints.getMeeting_id());
+            preparedStatement.execute();
 
-            ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
             rs.next();
-            int key = rs.getInt("complaint_id");
-            complaints.setComplain_id(key);
+
+            int generatedKey = rs.getInt("id");
+            complaints.setid(generatedKey);
             return complaints;
+
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -33,23 +35,55 @@ public class PostgresComplaintsDAO implements ComplaintsDAO {
     @Override
     public List<Complaints> getAllComplaints() {
         try(Connection connection = connectionUtil.ConnectionUtil.createConnection()) {
-            String sql = "select * from complaints";
+            String sql = "select * from Complaints";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             List<Complaints> complaintsList = new ArrayList();
             while(rs.next()) {
                 Complaints complaints = new Complaints();
-                complaints.setComplain_id(rs.getInt("complaint_id"));
+                complaints.setid(rs.getInt("complaint_id"));
                 complaints.setDescription(rs.getString("description"));
                 complaints.setStatus(rs.getString("status"));
-                complaints.setMeeting_id(rs.getInt());
+                complaints.setMeeting_id(rs.getInt("meeting_id"));
+                complaintsList.add(complaints);
             }
+
+            return complaintsList;
+        }catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
+        return null;
     }
 
     @Override
-    public Complaints getComplaintById(int complain_id) {
-        return null;
+    public Complaints getComplaintById(int id) {
+
+        try (Connection connection = connectionUtil.ConnectionUtil.createConnection()){
+            String sql = "select * from Complaints where complaint_id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+
+            Complaints complaints = new Complaints();
+            complaints.setid(rs.getInt("complaint_id"));
+            complaints.setDescription(rs.getString("description"));
+            complaints.setStatus(rs.getString("status"));
+            complaints.setMeeting_id(rs.getInt("meeting_id"));
+            return complaints;
+
+
+        } catch (SQLException sqlException) {
+        sqlException.printStackTrace();
+            return null;
+    }
     }
 }
+
+
+
+
+
+
 

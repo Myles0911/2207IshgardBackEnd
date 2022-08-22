@@ -1,7 +1,10 @@
-package service;
+package service.complaints;
 
 import daos.complaints.ComplaintsDAO;
 import entities.Complaints;
+import service.complaints.ComplaintsServices;
+
+import java.util.List;
 
 public class ComplaintsServicesImpl implements ComplaintsServices {
     private ComplaintsDAO complaintsDAO;
@@ -18,11 +21,19 @@ public class ComplaintsServicesImpl implements ComplaintsServices {
         if (complaints.getStatus().length() == 0) {
             throw new RuntimeException("Sorry, you must place a status on this complaint");
         }
-        if(complaints.getMeeting_id() == 0) {
-            throw new RuntimeException("This complaint must be matched with a meeting");
-        }
+
         Complaints myC = this.complaintsDAO.createComplaints(complaints);
-        return complaints;
+        return myC;
+    }
+
+    @Override
+    public Complaints getComplaintByID(int id) {
+       return this.complaintsDAO.getComplaintById(id);
+    }
+
+    @Override
+    public List<Complaints> getAllComplaints() {
+       return this.complaintsDAO.getAllComplaints();
     }
 }
 

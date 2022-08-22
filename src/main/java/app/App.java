@@ -1,10 +1,12 @@
 package app;
 
 import daos.complaints.PostgresComplaintsDAO;
+import handlers.GetAllComplaintsHandler;
+import handlers.GetSpecificComplaintHandler;
 import handlers.ReportIshgardComplaintsHandler;
 import io.javalin.Javalin;
-import service.ComplaintsServices;
-import service.ComplaintsServicesImpl;
+import service.complaints.ComplaintsServices;
+import service.complaints.ComplaintsServicesImpl;
 
 public class App {
     public static ComplaintsServices complaintsServices = new ComplaintsServicesImpl( new PostgresComplaintsDAO());
@@ -15,9 +17,17 @@ public class App {
             config.enableCorsForAllOrigins();
         });
 
-        //Routes for Ishgardians
+        //Routes for Complaints
         ReportIshgardComplaintsHandler reportIshgardComplaintsHandler = new ReportIshgardComplaintsHandler();
+        GetSpecificComplaintHandler getSpecificComplaintHandler = new GetSpecificComplaintHandler();
+        GetAllComplaintsHandler getAllComplaintsHandler = new GetAllComplaintsHandler();
+
+
+
+
         app.post("/complaints ", reportIshgardComplaintsHandler);
+        app.get("/complaints/{id}", getSpecificComplaintHandler);
+        app.get("/complaints", getAllComplaintsHandler);
         app.start();
     }
 
