@@ -1,7 +1,7 @@
 package service.ishgardian;
 
-import entities.Ishgardian;
+import entities.Ishgardians;
 
 public interface LoginService {
-    Ishgardian validateUser(String name, String password);
+    Ishgardians validateUser(String name, String password);
 }

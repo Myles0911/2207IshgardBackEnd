@@ -39,7 +39,7 @@ public class ComplaintsDAOtest {
     void create_Complaints_test() {
         Complaints complaints = new Complaints(1, "The Brume needs to be better maintained", "UNREVIEWED", -1);
         Complaints savedComplaints = complaintsDAO.createComplaints(complaints);
-        Assertions.assertNotEquals(0, savedComplaints.getid());
+        Assertions.assertNotEquals(0, savedComplaints.getId());
         System.out.println(complaints);
     }
 

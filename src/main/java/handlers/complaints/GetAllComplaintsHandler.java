@@ -1,4 +1,4 @@
-package handlers;
+package handlers.complaints;
 
 import app.App;
 import com.google.gson.Gson;
@@ -12,5 +12,6 @@ public class GetAllComplaintsHandler implements Handler {
         Gson gson = new Gson();
         String json = gson.toJson(App.complaintsServices.getAllComplaints());
         ctx.result(json);
+        System.out.println("Created All Complaints" );
     }
 }

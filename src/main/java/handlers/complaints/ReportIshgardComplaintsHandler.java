@@ -1,4 +1,4 @@
-package handlers;
+package handlers.complaints;
 
 import app.App;
 import com.google.gson.Gson;
@@ -19,6 +19,7 @@ public class ReportIshgardComplaintsHandler implements Handler {
         String comSon = gson.toJson(newComplaints);
         ctx.status(201);
         ctx.result(comSon);
+        System.out.println("Created Complaint" + complaints);
 
     }
 

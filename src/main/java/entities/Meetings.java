@@ -5,14 +5,17 @@ import java.util.Objects;
 public class Meetings {
     int meeting_id;
     String address;
-    long time;
+    String summary;
+    int time;
 
 public Meetings() {
 
 }
-    public Meetings(int meeting_id, String address, long time) {
+
+    public Meetings(int meeting_id, String address, String summary, int time) {
         this.meeting_id = meeting_id;
         this.address = address;
+        this.summary = summary;
         this.time = time;
     }
 
@@ -32,11 +35,19 @@ public Meetings() {
         this.address = address;
     }
 
-    public long getTime() {
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public int getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
@@ -45,12 +56,12 @@ public Meetings() {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Meetings meetings = (Meetings) o;
-        return meeting_id == meetings.meeting_id && time == meetings.time && address.equals(meetings.address);
+        return meeting_id == meetings.meeting_id && time == meetings.time && address.equals(meetings.address) && summary.equals(meetings.summary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(meeting_id, address, time);
+        return Objects.hash(meeting_id, address, summary, time);
     }
 
     @Override
@@ -58,6 +69,7 @@ public Meetings() {
         return "Meetings{" +
                 "meeting_id=" + meeting_id +
                 ", address='" + address + '\'' +
+                ", summary='" + summary + '\'' +
                 ", time=" + time +
                 '}';
     }

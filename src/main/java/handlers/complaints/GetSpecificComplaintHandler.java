@@ -1,4 +1,4 @@
-package handlers;
+package handlers.complaints;
 
 import app.App;
 import com.google.gson.Gson;
@@ -15,4 +15,5 @@ public class GetSpecificComplaintHandler implements Handler {
         Gson gson = new Gson();
         String json = gson.toJson(complaints);
         ctx.result(json);
+        System.out.println("Created Specific Complaint" );
     }}

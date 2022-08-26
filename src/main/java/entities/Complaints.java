@@ -6,11 +6,11 @@ public class Complaints {
     int id;
     String description;
     String status;
-    int meeting_id;
+   int meeting_id;
 
-public Complaints() {
+    public Complaints() {
 
-}
+    }
 
     public Complaints(int id, String description, String status, int meeting_id) {
         this.id = id;
@@ -19,11 +19,11 @@ public Complaints() {
         this.meeting_id = meeting_id;
     }
 
-    public int getid() {
+    public int getId() {
         return id;
     }
 
-    public void setid(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

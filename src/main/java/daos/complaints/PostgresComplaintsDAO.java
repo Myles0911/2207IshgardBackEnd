@@ -16,14 +16,14 @@ public class PostgresComplaintsDAO implements ComplaintsDAO {
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, complaints.getDescription());
             preparedStatement.setString(2, complaints.getStatus());
-            preparedStatement.setInt(3,complaints.getMeeting_id());
-            preparedStatement.execute();
+            preparedStatement.setInt(3, complaints.getMeeting_id());
 
+            preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             rs.next();
 
-            int generatedKey = rs.getInt("id");
-            complaints.setid(generatedKey);
+            int generatedKey = rs.getInt("complaint_id");
+            complaints.setId(generatedKey);
             return complaints;
 
         } catch (SQLException sqlException) {
@@ -41,7 +41,7 @@ public class PostgresComplaintsDAO implements ComplaintsDAO {
             List<Complaints> complaintsList = new ArrayList();
             while(rs.next()) {
                 Complaints complaints = new Complaints();
-                complaints.setid(rs.getInt("complaint_id"));
+                complaints.setId(rs.getInt("complaint_id"));
                 complaints.setDescription(rs.getString("description"));
                 complaints.setStatus(rs.getString("status"));
                 complaints.setMeeting_id(rs.getInt("meeting_id"));
@@ -67,7 +67,7 @@ public class PostgresComplaintsDAO implements ComplaintsDAO {
             rs.next();
 
             Complaints complaints = new Complaints();
-            complaints.setid(rs.getInt("complaint_id"));
+            complaints.setId(rs.getInt("complaint_id"));
             complaints.setDescription(rs.getString("description"));
             complaints.setStatus(rs.getString("status"));
             complaints.setMeeting_id(rs.getInt("meeting_id"));
