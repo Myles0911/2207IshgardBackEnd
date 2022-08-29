@@ -24,7 +24,7 @@ dependencies {
     }
     task customFatJar(type: Jar) {
         manifest {
-            attributes 'Main-Class': 'app.App'
+            attributes 'Main-Class': 'dev.walker.app.App'
         }
         baseName = '2207IshgardBackEnd'
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
